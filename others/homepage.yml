@@ -1,0 +1,19 @@
+version: "3.3"
+volumes:
+  dashboard_config:
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    environment:
+      HOMEPAGE_ALLOWED_HOSTS: start.contoso.local
+    ports:
+      - 3000:3000
+    volumes:
+      - dashboard_config:/app/config # Make sure your local config directory exists
+      - /var/run/docker.sock:/var/run/docker.sock:ro # (optional) For docker integrations
+      - /mnt/data-nextcloud/:/mnt/disk0:ro
+      - /mnt/usb-backup/:/mnt/disk1:ro
+    labels:
+      com.centurylinklabs.watchtower.enable: 'true'

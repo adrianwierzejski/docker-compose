@@ -1,0 +1,9 @@
+{
+  acme_dns cloudflare {env.CLOUDFLARE_API_TOKEN}
+}
+dysk.contoso.local:443 {
+  reverse_proxy 10.50.0.16:11000
+}
+start.contoso.local:443 {
+  reverse_proxy 10.50.0.17:3000
+}
